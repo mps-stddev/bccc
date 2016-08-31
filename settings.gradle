@@ -1,0 +1,4 @@
+rootProject.name = 'bccc'
+//gradle.startParameter.refreshDependencies = true
+//gradle.startParameter.showStacktrace = org.gradle.logging.ShowStacktrace.ALWAYS
+include 'task1'
