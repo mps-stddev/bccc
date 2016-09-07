@@ -3,6 +3,7 @@ package jp.co.mpsol.bccc.task1;
 import static java.lang.System.out;
 import static org.bitcoinj.core.Utils.HEX;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -19,8 +20,9 @@ import org.spongycastle.crypto.digests.RIPEMD160Digest;
 import org.spongycastle.util.encoders.Hex;
 
 public class Task1 {
-	public static void main(String[] args) throws NoSuchAlgorithmException, AssertFailException, SignatureException {
-		String d = "12345613";
+	public static void main(String[] args) throws NoSuchAlgorithmException, AssertFailException, SignatureException,
+			UnsupportedEncodingException {
+		String d = "12345613gjelkjge";
 		String privKeyHex = "66d63116c23f4c34dab4d074377b7852540587031ce7905953344d006a08e3fe";
 
 		Function<byte[], String> base58check = b -> {
@@ -29,7 +31,7 @@ public class Task1 {
 			return Base58.encode(ret);
 		};
 
-		byte[] input = HEX.decode(d);
+		byte[] input = d.getBytes("UTF-8");
 
 		println("D", d);
 
@@ -42,15 +44,16 @@ public class Task1 {
 		println("base58check(d)", base58check.apply(input));
 		println("base58decodeChecked", Base58.decodeChecked(base58check.apply(input)));
 
+		// RFC6979を使っているかどうかについて
+		// https://github.com/mycelium-com/wallet/issues/141
+
+		// TODO: Secp256k1の有効化
+		println("Secp256k1 enabled", Secp256k1Context.isEnabled());
+
 		ECKey eckey = ECKey.fromPrivate(new BigInteger(Hex.decode(privKeyHex)));
 
 		println("privateKey", eckey.getPrivateKeyAsHex());
 		println("publicKey", eckey.getPublicKeyAsHex());
-
-		// RFC6979を使っているかどうかについて
-		// https://github.com/mycelium-com/wallet/issues/141
-
-		println("Secp256k1 enabled", Secp256k1Context.isEnabled());
 
 		String signatureBase64 = eckey.signMessage(d);
 		println("signatureBase64", signatureBase64);
