@@ -1,0 +1,10 @@
+.gradle
+.settings
+.classpath
+.eclipse-pmd
+.project
+/bin
+/bin/*
+/build
+/data
+/hs_err_pid*.log

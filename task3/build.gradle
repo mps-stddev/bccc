@@ -1,0 +1,11 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8
+
+dependencies {
+	compile 'org.bitcoinj:bitcoinj-core:0.14.3'
+	testCompile 'junit:junit:4.12'
+}
+
+

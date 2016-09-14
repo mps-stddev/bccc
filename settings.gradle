@@ -3,3 +3,4 @@ rootProject.name = 'bccc'
 //gradle.startParameter.showStacktrace = org.gradle.logging.ShowStacktrace.ALWAYS
 include 'task1'
 include 'task2'
+include 'task3'
